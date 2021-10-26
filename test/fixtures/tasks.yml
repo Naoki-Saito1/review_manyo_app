@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  limit: 2021-10-26
+  status: 1
+  priority: 1
+  reference: 
+
+two:
+  title: MyString
+  content: MyText
+  limit: 2021-10-26
+  status: 1
+  priority: 1
+  reference: 
