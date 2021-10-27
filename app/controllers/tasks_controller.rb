@@ -3,14 +3,27 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    # binding.irb
+    @tasks =  current_user.tasks
     if params[:hoge]
-      @tasks = Task.sort_hoge
-    else
-      @tasks = Task.all
+      @tasks = current_user.tasks.sort_hoge
+    elsif params[:sort_status]
+      @tasks = current_user.tasks.sort_status
+    elsif params[:sort_priority]
+      @tasks = current_user.tasks.sort_priority
+    end
+    
+    if params[:task].present?
+      if params[:task][:title].present? && params[:task][:status].present?
+        @tasks = @tasks.task_sort(params[:task][:title]).status_sort(params[:task][:status])
+      elsif params[:task][:title].present?
+        @tasks = @tasks.task_sort(params[:task][:title])
+      elsif params[:task][:status].present?
+        @tasks = @tasks.status_sort(params[:task][:status])
+      end
     end
   end
-
+  # (params[:task][:title])(params[:task][:status])
   # GET /tasks/1 or /tasks/1.json
   def show
   end

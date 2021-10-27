@@ -37,10 +37,17 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
-<%= link_to 'そーっと', tasks_path(hoge: "true") %>
-
+<%= link_to '作成順', tasks_path(hoge: "true") %>
+<%= link_to 'これなんだ', tasks_path(sort_status: "true") %>
+<%= link_to 'これなんだ' , tasks_path(sort_priority: "true") %>
 
 <%# button_to '', tasks_path(hoge: "true") %> 
 <%# button_to 'そーっと', tasks_path(hoge: "true") %>
 
-
+<%= form_with url: tasks_path, scope: :task, method: :get, local: true do |yosida| %>
+    <%= yosida.label :'title' %>
+    <%= yosida.text_field :title %>
+    <%= yosida.label :'status'%>
+    <%= yosida.select :status, Task.statuses.keys.to_a, { include_blank:'選択してください'}  %>
+    <%= yosida.submit 'Search' %>
+  <% end %>
