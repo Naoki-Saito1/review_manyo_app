@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+< form_with >
+
+
+
+
+
+
+
+
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
@@ -23,17 +32,17 @@
 
   <div class="field">
     <%= form.label :limit %>
-    <%= form.date_select :limit %>
+    <%= form.date_field :limit %>
   </div>
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.number_field :status %>
+    <%= form.select :status,Task.statuses.keys.to_a, {} %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.select :priority, Task.priorities.keys %>
   </div>
 
   

@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: 名前
+        content: 内容
+        status: 状態
+        limit: 期限
+        priority: 優先度

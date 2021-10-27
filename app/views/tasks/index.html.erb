@@ -11,6 +11,7 @@
       <th>Limit</th>
       <th>Status</th>
       <th>Priority</th>
+      <th>CreateTime</th>
       
       <th colspan="3"></th>
     </tr>
@@ -24,6 +25,7 @@
         <td><%= task.limit %></td>
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
+        <td><%= task.created_at.to_s(:datetime_jp) %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -35,3 +37,10 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+<%= link_to 'そーっと', tasks_path(hoge: "true") %>
+
+
+<%# button_to '', tasks_path(hoge: "true") %> 
+<%# button_to 'そーっと', tasks_path(hoge: "true") %>
+
+
