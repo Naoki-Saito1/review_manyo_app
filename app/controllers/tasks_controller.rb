@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
@@ -21,11 +21,11 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
+        format.html { redirect_to @task, notice: "Task was successfully cre." }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,6 +64,10 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :content, :limit, :status, :priority, :reference)
+      params.require(:task).permit(:title, :content, :limit, :status, :priority, :user_id)
     end
 end
+
+
+
+# こうすることでuser.tasksといったメソッドで紐づくTaskオブジェクトの一覧を取得できます。Taskクラスのインスタンスはtask.userで紐づくUserオブジェクトを取得できます。
