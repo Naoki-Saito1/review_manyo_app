@@ -1,9 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+@tasks = current_user.tasks
+    @tasks = @tasks.sort_hoge if params[:hoge]
+    @tasks = @tasks.sort_status if params[:sort_status]
+    @tasks = @tasks.sort_priority if params[:sort_priority]
+    @tasks = @tasks.task_sort(params[:title]) if params[:title].present?
+    @tasks = @tasks.status_sort(params[:status]) if params[:status].present?
 
 * Ruby version
 

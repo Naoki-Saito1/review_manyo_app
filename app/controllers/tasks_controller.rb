@@ -1,27 +1,40 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  # GET /tasks or /tasks.json
   def index
-    # binding.irb
-    @tasks =  current_user.tasks
-    if params[:hoge]
-      @tasks = current_user.tasks.sort_hoge
-    elsif params[:sort_status]
-      @tasks = current_user.tasks.sort_status
-    elsif params[:sort_priority]
-      @tasks = current_user.tasks.sort_priority
-    end
     
-    if params[:task].present?
-      if params[:task][:title].present? && params[:task][:status].present?
-        @tasks = @tasks.task_sort(params[:task][:title]).status_sort(params[:task][:status])
-      elsif params[:task][:title].present?
-        @tasks = @tasks.task_sort(params[:task][:title])
-      elsif params[:task][:status].present?
-        @tasks = @tasks.status_sort(params[:task][:status])
-      end
-    end
+  #  @tasks =  current_user.tasks
+  #  if params[:hoge]
+  #    @tasks = current_user.tasks.sort_hoge
+  #  elsif params[:sort_status]
+  #    @tasks = current_user.tasks.sort_status
+  #  elsif params[:sort_priority]
+  #    @tasks = current_user.tasks.sort_priority
+  #  end
+    
+  @tasks = current_user.tasks
+  @tasks = @tasks.sort_hoge if params[:hoge]
+  @tasks = @tasks.sort_status if params[:sort_status]
+  @tasks = @tasks.sort_priority if params[:sort_priority]
+
+  @tasks = @tasks.task_sort(params[:title]) if params[:title].present?
+  @tasks = @tasks.status_sort(params[:status]) if params[:status].present?
+  # binding.irb
+  @tasks = @tasks.task_sort(params[:title]).status_sort(params[:status]) if params[:title].present? &&
+  params[:status].present?
+  # binding.irb
+  # @tasks = @tasks.task_sort(params[:title]).status_sort(params[:status]) if params([:title]).present? && params[:status].present?
+  
+    # binding.irb
+    # if params[:task].present?
+    #   if params[:task][:title].present? && params[:task][:status].present?
+    #     # params[:title]        @tasks = @tasks.task_sort(params[:task][:title]).status_sort(params[:task][:status])
+    #   elsif params[:task][:title].present?
+    #     @tasks = @tasks.task_sort(params[:task][:title])
+    #   elsif params[:task][:status].present?
+    #     @tasks = @tasks.status_sort(params[:task][:status])
+    #   end
+    # end
   end
   # (params[:task][:title])(params[:task][:status])
   # GET /tasks/1 or /tasks/1.json

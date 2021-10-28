@@ -8,6 +8,6 @@ class Task < ApplicationRecord
   scope :task_sort, -> (title_hoge){where('title LIKE ?', "%#{title_hoge}%")}
                       #  モデル名.where('検索するカラム名 LIKE(?)', "検索するキーワード")
   scope :status_sort, -> (status_hoge){where(status: status_hoge)}    
-  scope :and_sort, -> (title_hoge,status_hoge) { where('title LIKE ?', "%#{title_hoge}%").where(status: status_hoge) }
+  # scope :and_sort, -> (title_hoge,status_hoge) { where('title LIKE ?', "%#{title_hoge}%").where(status: status_hoge) }
                 
 end
